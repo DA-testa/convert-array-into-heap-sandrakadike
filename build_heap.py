@@ -7,18 +7,12 @@ def build_heap(data):
     # try to achieve  O(n) and not O(n2)
     n = len(data)
 
-    # build a binary heap bottom-up starting from the last non-leaf node
-    for i in range(n // 2 - 1, -1):
+    for i in range(1, n):
         j = i
-        while 2*j + 1 < n:
-            k = 2*j + 1
-            if k+1 < n and data[k+1] < data[k]:
-                k += 1
-            if data[j] <= data[k]:
-                break
-            swaps.append((j, k))
-            data[j], data[k] = data[k], data[j]
-            j = k
+        while j > 0 and data[(j - 1) // 2] < data[j]:
+            data[j], data[(j - 1) // 2] = data[(j - 1) // 2], data[j]
+            swaps.append(((j - 1) // 2, j))
+            j = (j - 1) // 2
 
 
 
