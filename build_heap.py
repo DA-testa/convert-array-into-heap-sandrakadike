@@ -1,5 +1,5 @@
 # python3
-
+import io
 
 def build_heap(data):
     swaps = []
@@ -33,15 +33,17 @@ def main():
     izvele=(input())
     if "I" in izvele:
         n = int(input())
+        data = list(map(int, input().split()))
     if "F" in izvele:
         filename=input()
-        with open(filename) as f:
-            n=f.read()
+        with io.open (filename,  mode='r', encoding='utf-8') as f:
+            n=int(f.readline())
+            data = list(map(int, f.readline().split()))
 
 
     # input from keyboard
     # n = int(input())
-    data = list(map(int, input().split()))
+    # data = list(map(int, input().split()))
 
     # checks if lenght of data is the same as the said lenght
     assert len(data) == n
