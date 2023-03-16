@@ -33,10 +33,10 @@ def main():
     izvele=(input())
     if "I" in izvele:
         n = int(input())
-    if "F" in izvele:
-        filename=input()
-        with open(filename) as f:
-            n=f.read()
+    # if "F" in izvele:
+    #     filename=input()
+    #     with open(filename) as f:
+    #         n=f.read()
 
 
     # input from keyboard
