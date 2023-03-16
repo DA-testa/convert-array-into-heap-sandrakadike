@@ -8,20 +8,16 @@ def build_heap(data):
     n = len(data)
 
     # build a binary heap bottom-up starting from the last non-leaf node
-    for i in range(n // 2 - 1, -1, -1):
+    for i in range(n // 2 - 1, -1):
         j = i
-        while True:
-            k = j
-            left_child = 2 * j + 1
-            right_child = 2 * j + 2
-            if left_child < n and data[left_child] < data[k]:
-                k = left_child
-            if right_child < n and data[right_child] < data[k]:
-                k = right_child
-            if k == j:
+        while 2*j + 1 < n:
+            k = 2*j + 1
+            if k+1 < n and data[k+1] < data[k]:
+                k += 1
+            if data[j] <= data[k]:
                 break
-            data[j], data[k] = data[k], data[j]
             swaps.append((j, k))
+            data[j], data[k] = data[k], data[j]
             j = k
 
 
@@ -34,10 +30,17 @@ def main():
     # TODO : add input and corresponding checks
     # add another input for I or F 
     # first two tests are from keyboard, third test is from a file
+    izvele=(input())
+    if "I" in izvele:
+        n = int(input())
+    if "F" in izvele:
+        filename=input()
+        with open(filename) as f:
+            n=f.read()
 
 
     # input from keyboard
-    n = int(input())
+    # n = int(input())
     data = list(map(int, input().split()))
 
     # checks if lenght of data is the same as the said lenght
