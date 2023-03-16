@@ -8,9 +8,9 @@ def build_heap(data):
     n = len(data)
 
     for i in range(n // 2, -1, -1):
-       j = i
-    #    k = j
-       while j * 2 + 1 < n:
+        j = i
+        # k = j
+        while j * 2 + 1 < n:
             k = j * 2 + 1
             if k + 1 < n and data[k + 1] > data[k]:
                 k += 1
