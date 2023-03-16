@@ -5,6 +5,25 @@ def build_heap(data):
     swaps = []
     # TODO: Creat heap and heap sort
     # try to achieve  O(n) and not O(n2)
+    n = len(data)
+
+    # build a binary heap bottom-up starting from the last non-leaf node
+    for i in range(n // 2 - 1, -1, -1):
+        j = i
+        while True:
+            k = j
+            left_child = 2 * j + 1
+            right_child = 2 * j + 2
+            if left_child < n and data[left_child] < data[k]:
+                k = left_child
+            if right_child < n and data[right_child] < data[k]:
+                k = right_child
+            if k == j:
+                break
+            data[j], data[k] = data[k], data[j]
+            swaps.append((j, k))
+            j = k
+
 
 
     return swaps
