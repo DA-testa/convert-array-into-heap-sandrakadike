@@ -9,12 +9,12 @@ def build_heap(data):
 
     for i in range(n // 2, -1, -1):
        j = i
-       k = j
+    #    k = j
        while j * 2 + 1 < n:
             k = j * 2 + 1
             if k + 1 < n and data[k + 1] > data[k]:
                 k += 1
-            if data[j] >= data[k]:
+            if data[j] <= data[k]:
                 break
             data[j], data[k] = data[k], data[j]
             swaps.append((j, k))
@@ -33,10 +33,10 @@ def main():
     izvele=(input())
     if "I" in izvele:
         n = int(input())
-    # if "F" in izvele:
-    #     filename=input()
-    #     with open(filename) as f:
-    #         n=f.read()
+    if "F" in izvele:
+        filename=input()
+        with open(filename) as f:
+            n=f.read()
 
 
     # input from keyboard
