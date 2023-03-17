@@ -1,29 +1,46 @@
 # python3
 # import io
 
-def build_heap(i,data):
+def build_heap(data):
     swaps = []
     # TODO: Creat heap and heap sort
     # try to achieve  O(n) and not O(n2)
     n = len(data)
 
-    parent=i
-    leftChild=2*i+1
-    rightChild=2*i+1
+    for i in range(n//2, -1, -1):
+        parent = i
+        leftChild = 2*i + 1
+        rightChild = 2*i + 2
 
-    if leftChild<=n-1 and data[leftChild]<data[parent]:
-        parent=leftChild
-    if rightChild<=n-1 and data[rightChild]<data[parent]:
-        parent=rightChild
+        # Find the smallest child node
+        if leftChild < n and data[leftChild] < data[parent]:
+            parent = leftChild
+        if rightChild < n and data[rightChild] < data[parent]:
+            parent = rightChild
 
-    if i!=parent:
-        data[i],data[parent]=data[parent],data[i]
+        if i != parent:
+            data[i], data[parent] = data[parent], data[i]
+            swaps.append((i, parent))
 
-    
+            # Continue the heapify process from the smallest child node
+            child = parent
+            while child < n//2:
+                parent = child
+                left_child = 2*parent + 1
+                right_child = 2*parent + 2
 
-    build_heap(parent)
-    for i in range(n//2,-1.-1,-1):
-        build_heap(i)
+                if left_child < n and data[left_child] < data[parent]:
+                    parent = left_child
+                if right_child < n and data[right_child] < data[parent]:
+                    parent = right_child
+
+                if parent == child:
+                    break
+
+                data[parent], data[child] = data[child], data[parent]
+                swaps.append((parent, child))
+
+                child = parent
     return swaps
 
     
