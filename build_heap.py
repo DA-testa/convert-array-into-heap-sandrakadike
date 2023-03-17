@@ -1,30 +1,32 @@
 # python3
-import io
+# import io
 
-def build_heap(data):
+def build_heap(i,data):
     swaps = []
     # TODO: Creat heap and heap sort
     # try to achieve  O(n) and not O(n2)
     n = len(data)
 
-    for i in range(n // 2, -1, -1):
-        j = i
-        # k = j
-        while j * 2 + 1 < n:
-            k = j * 2 + 1
-            if k + 1 < n and data[k + 1] > data[k]:
-                k += 1
-            if data[j] <= data[k]:
-                break
-            data[j], data[k] = data[k], data[j]
-            swaps.append((j, k))
-            j = k
+    parent=i
+    leftChild=2*i+1
+    rightChild=2*i+1
 
+    if leftChild<=n-1 and data[leftChild]<data[parent]:
+        parent=leftChild
+    if rightChild<=n-1 and data[rightChild]<data[parent]:
+        parent=rightChild
 
+    if i!=parent:
+        data[i],data[parent]=data[parent],data[i]
 
+    
+
+    build_heap(parent)
+    for i in range(n//2,-1.-1,-1):
+        build_heap(i)
     return swaps
 
-
+    
 def main():
     
     # TODO : add input and corresponding checks
@@ -36,7 +38,7 @@ def main():
         data = list(map(int, input().split()))
     if "F" in izvele:
         filename=input()
-        with io.open (filename,  mode='r', encoding='utf-8') as f:
+        with open(f"tests/{filename}") as f:
             n=int(f.readline())
             data = list(map(int, f.readline().split()))
 
