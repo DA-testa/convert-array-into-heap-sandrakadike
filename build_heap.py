@@ -1,54 +1,41 @@
 # python3
-# import io
+
 
 def build_heap(data):
     swaps = []
-    # TODO: Creat heap and heap sort
-    # try to achieve  O(n) and not O(n2)
     n = len(data)
 
-    for i in range(n//2, -1, -1):
-        parent = i
-        leftChild = 2*i + 1
-        rightChild = 2*i + 2
+    # iterate over all non-leaf nodes in reverse order
+    for i in range(n // 2 - 1, -1, -1):
+        # call sift_down to move the current node to its correct position
+        j = i
+        while True:
+            left_child = 2 * j + 1
+            right_child = 2 * j + 2
 
-        # Find the smallest child node
-        if leftChild < n and data[leftChild] < data[parent]:
-            parent = leftChild
-        if rightChild < n and data[rightChild] < data[parent]:
-            parent = rightChild
+            # find the smallest child
+            smallest = j
+            if left_child < n and data[left_child] < data[smallest]:
+                smallest = left_child
+            if right_child < n and data[right_child] < data[smallest]:
+                smallest = right_child
 
-        if i != parent:
-            data[i], data[parent] = data[parent], data[i]
-            swaps.append((i, parent))
+            if j != smallest:
+                # swap the current node with the smallest child
+                swaps.append((j, smallest))
+                data[j], data[smallest] = data[smallest], data[j]
+                j = smallest
+            else:
+                break
 
-            # Continue the heapify process from the smallest child node
-            child = parent
-            while child < n//2:
-                parent = child
-                left_child = 2*parent + 1
-                right_child = 2*parent + 2
-
-                if left_child < n and data[left_child] < data[parent]:
-                    parent = left_child
-                if right_child < n and data[right_child] < data[parent]:
-                    parent = right_child
-
-                if parent == child:
-                    break
-
-                data[parent], data[child] = data[child], data[parent]
-                swaps.append((parent, child))
-
-                child = parent
     return swaps
 
-    
+
 def main():
-    
-    # TODO : add input and corresponding checks
-    # add another input for I or F 
-    # first two tests are from keyboard, third test is from a file
+
+    # TODO: Add input and corresponding checks
+    # Add another input for I or F
+    # First two tests are from keyboard, third test is from a file
     izvele=(input())
     if "I" in izvele:
         n = int(input())
@@ -60,24 +47,26 @@ def main():
             data = list(map(int, f.readline().split()))
 
 
-    # input from keyboard
+    # Input from keyboard
     # n = int(input())
     # data = list(map(int, input().split()))
 
-    # checks if lenght of data is the same as the said lenght
+    # Checks if length of data is the same as the said length
     assert len(data) == n
 
-    # calls function to assess the data 
+    # Calls function to assess the data
     # and give back all swaps
-    swaps = build_heap(data)
+    swaps = build_heap(data,)
 
-    # TODO: output how many swaps were made, 
+    # TODO: Output how many swaps were made,
     # this number should be less than 4n (less than 4*len(data))
 
-
-    # output all swaps
+    # Output all swaps
     print(len(swaps))
     for i, j in swaps:
+        # Swap the elements in swaps before printing them
+        if i > j:
+            i, j = j, i
         print(i, j)
 
 
